@@ -1,10 +1,17 @@
 // const sayHello = require("../domain/sayHello");
 
 function sayHello(name) {
-  return name === ""
-    ? `Hello, Stranger, nice to meet you!`
-    : `Hello, ${name}, nice to meet you!`;
+  const greetings = [
+    `Hello, ${name}, nice to meet you!`,
+    `Greetings, ${name}!`,
+    `Welcome, ${name}! Have a great day`,
+    `Nice to have you, ${name}!`,
+  ];
+
+  if (name === "") return `Hello, Stranger, nice to meet you!`;
+  return greetings[Math.floor(Math.random() * greetings.length)];
 }
+
 const button = document.getElementById("button");
 const inputArea = document.getElementById("name");
 const showGreeting = document.getElementById("show-message");
