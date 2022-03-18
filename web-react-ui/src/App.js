@@ -2,17 +2,29 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  function sayHello(name) {
-    return name === ""
-      ? `Hello, Stranger, nice to meet you!`
-      : `Hello, ${name}, nice to meet you!`;
+  function sayHello(name, greetingSelector) {
+    const greetings = [
+      `Hello, ${name}, nice to meet you!`,
+      `Greetings, ${name}!`,
+      `Welcome, ${name}! Have a great day`,
+      `Nice to have you, ${name}!`,
+    ];
+    if (name === "") return "Hello Stranger";
+
+    const selection = greetingSelector();
+    if (selection < 0 || selection > 3) return name;
+    return greetings[selection];
   }
 
   const [name, setName] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    setName(sayHello(e.target[0].value));
+    setName(
+      sayHello(e.target[0].value, () => {
+        return Math.floor(Math.random() * 4);
+      })
+    );
     e.target[0].value = "";
   }
 
